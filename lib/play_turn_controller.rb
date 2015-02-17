@@ -46,7 +46,7 @@ module TTT
       def build_game_from_params(request)
         game_type = extract_game_type(request)
         board = BoardWebPresenter.to_board(request.params['board'])
-        TTT::Game.build_game_with_board(TTT::AsyncInterface.new, game_type, board)
+        TTT::Game.build_game_with_board(game_type, board)
       end
 
       def extract_game_type(request)
