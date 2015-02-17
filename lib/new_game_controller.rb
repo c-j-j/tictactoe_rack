@@ -1,6 +1,7 @@
 require 'rack'
 require 'tictactoe'
 require 'url_helper'
+require 'board_web_presenter'
 
 module TTT
   module Web
@@ -10,7 +11,8 @@ module TTT
       def call(env)
         req = Rack::Request.new(env)
         game_type = extract_game_type(req)
-        redirect_to_play_turn_page(prepare_game(game_type, extract_board_size(req)).board_positions, game_type)
+        board = TTT::Board.new(extract_board_size(req))
+        redirect_to_play_turn_page(BoardWebPresenter.to_web_object(board), game_type)
       end
 
       private

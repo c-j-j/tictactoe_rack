@@ -1,6 +1,7 @@
 require 'rack'
 require 'tictactoe'
 require 'url_helper'
+require 'board_web_presenter'
 
 module TTT
   module Web
@@ -39,12 +40,12 @@ module TTT
 
       def calcuate_display_fields(request, game)
           @game_presenter = game.presenter
-          @next_turn_url = TTT::Web::URLHelper.play_turn_url(extract_game_type(request), game.board_positions)
+          @next_turn_url = TTT::Web::URLHelper.play_turn_url(extract_game_type(request), BoardWebPresenter.to_web_object(game.board))
       end
 
       def build_game_from_params(request)
         game_type = extract_game_type(request)
-        board = TTT::Board.new_board_with_positions(JSON.parse(request.params['board']))
+        board = BoardWebPresenter.to_board(request.params['board'])
         TTT::Game.build_game_with_board(TTT::AsyncInterface.new, game_type, board)
       end
 
@@ -56,6 +57,7 @@ module TTT
         position = req.params['position']
         position.to_i unless position.nil?
       end
+
     end
   end
 end

@@ -1,4 +1,5 @@
 require 'new_game_controller'
+require 'board_web_presenter'
 require 'rack/test'
 
 describe TTT::Web::NewGameController do
@@ -27,8 +28,7 @@ describe TTT::Web::NewGameController do
   it 'adds empty board to redirect url' do
     get('/', {'game_type' => game_type, 'board_size' => '3'})
     follow_redirect!
-    JSON.parse(last_request.params['board']).each do |cell|
-      expect(cell).to be(nil)
-    end
+    board = TTT::Web::BoardWebPresenter.to_board(last_request.params['board'])
+    expect(board.empty_positions.size).to eq(9)
   end
 end
