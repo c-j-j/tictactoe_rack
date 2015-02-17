@@ -1,7 +1,6 @@
 require 'rack'
 require 'tictactoe'
 require 'url_helper'
-require 'board_web_presenter'
 
 module TTT
   module Web

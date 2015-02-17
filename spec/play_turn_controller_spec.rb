@@ -2,7 +2,6 @@ require 'play_turn_controller'
 require 'rack/test'
 require 'tictactoe'
 require 'ostruct'
-require 'board_web_presenter'
 
 describe TTT::Web::PlayTurnController do
   let(:board) { TTT::Board.new(3) }

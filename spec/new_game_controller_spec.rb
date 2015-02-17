@@ -1,5 +1,5 @@
 require 'new_game_controller'
-require 'board_web_presenter'
+require 'tictactoe'
 require 'rack/test'
 
 describe TTT::Web::NewGameController do
