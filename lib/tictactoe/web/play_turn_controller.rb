@@ -1,8 +1,9 @@
 require 'rack'
-require 'tictactoe'
-require 'url_helper'
+require 'tictactoe/game'
+require 'tictactoe/board_web_presenter'
+require 'tictactoe/web/url_helper'
 
-module TTT
+module TicTacToe
   module Web
     class PlayTurnController
       include Rack::Utils
@@ -12,24 +13,28 @@ module TTT
 
       attr_reader :game_presenter
       attr_reader :next_turn_url
-      attr_reader :error_message
+      attr_reader :computer_has_next_turn
 
       def call(env)
         request = Rack::Request.new(env)
         game = build_game_from_params(request)
-        process_turn(game, extract_position_from_param(request))
+        play_game(game, request)
         generate_response(request, game)
       end
 
-      def process_turn(game, played_position)
-        if game.move_valid?(played_position)
-          game.play_turn(played_position)
+      def play_game(game, request)
+        if game.current_player_is_computer?
+          game.play_turn
         else
-          @error_message = INVALID_MOVE_MESSAGE
+          process_user_move(game, extract_position_from_param(request))
         end
       end
 
-      private
+      def process_user_move(game, played_position)
+        if game.move_valid?(played_position)
+          game.add_move(played_position)
+        end
+      end
 
       def generate_response(request, game)
         calcuate_display_fields(request, game)
@@ -37,15 +42,18 @@ module TTT
          [ERB.new(File.new(PLAY_VIEW, "r").read).result(binding) ]]
       end
 
-      def calcuate_display_fields(request, game)
-          @game_presenter = game.presenter
-          @next_turn_url = TTT::Web::URLHelper.play_turn_url(extract_game_type(request), BoardWebPresenter.to_web_object(game.board))
-      end
-
       def build_game_from_params(request)
         game_type = extract_game_type(request)
         board = BoardWebPresenter.to_board(request.params['board'])
-        TTT::Game.build_game_with_board(game_type, board)
+        TicTacToe::Game.build_game_with_board(game_type, board)
+      end
+
+      private
+
+      def calcuate_display_fields(request, game)
+        @game_presenter = game.presenter
+        @computer_has_next_turn = game.current_player_is_computer?
+        @next_turn_url = TicTacToe::Web::URLHelper.play_turn_url(extract_game_type(request), BoardWebPresenter.to_web_object(game.board))
       end
 
       def extract_game_type(request)

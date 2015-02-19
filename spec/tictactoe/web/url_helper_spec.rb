@@ -1,29 +1,29 @@
-require 'url_helper'
+require 'tictactoe/web/url_helper'
 require 'cgi'
 require 'uri'
 
-describe TTT::Web::URLHelper do
+describe TicTacToe::Web::URLHelper do
   it 'builds url string with game type parameter' do
-    url = TTT::Web::URLHelper.play_turn_url('some game type', '')
+    url = TicTacToe::Web::URLHelper.play_turn_url('some game type', '')
     params = extract_query_params(url)
     expect(params['game_type'][0]).to eq('some game type')
   end
 
   it 'builds url with board in string form' do
     positions = 'postions string'
-    url = TTT::Web::URLHelper.play_turn_url('some game type', positions)
+    url = TicTacToe::Web::URLHelper.play_turn_url('some game type', positions)
     params = extract_query_params(url)
     expect(params['board'][0]).to eq(positions)
   end
 
   it 'does not add position parameter if not provided' do
-    url = TTT::Web::URLHelper.play_turn_url('some game type', '')
+    url = TicTacToe::Web::URLHelper.play_turn_url('some game type', '')
     params = extract_query_params(url)
     expect(params['position'][0]).to be(nil)
   end
 
   it 'does add position parameter if provided' do
-    url = TTT::Web::URLHelper.play_turn_url('some game type', '', 'some position')
+    url = TicTacToe::Web::URLHelper.play_turn_url('some game type', '', 'some position')
     params = extract_query_params(url)
     expect(params['position'][0]).to eq('some position')
   end

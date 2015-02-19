@@ -1,6 +1,6 @@
 require 'uri'
 
-module TTT
+module TicTacToe
   module Web
     class URLHelper
       def self.play_turn_url(game_type, board_positions, position=nil)

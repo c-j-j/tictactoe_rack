@@ -1,8 +1,8 @@
-require 'tictactoe'
-require 'index_controller'
+require 'tictactoe/game'
+require 'tictactoe/web/index_controller'
 
-describe TTT::Web::IndexController do
-  let(:index_controller) { TTT::Web::IndexController.new }
+describe TicTacToe::Web::IndexController do
+  let(:index_controller) { TicTacToe::Web::IndexController.new }
   it 'returns 200 status code' do
     response = index_controller.call({})
     expect(response[0]).to eq(200)
@@ -16,7 +16,7 @@ describe TTT::Web::IndexController do
   it 'returns index html with game types' do
     response = index_controller.call({})
     html_response = response[2][0]
-    TTT::Game::GAME_TYPES.each do |game_type|
+    TicTacToe::Game::GAME_TYPES.each do |game_type|
       expect(html_response).to include(game_type)
     end
   end
@@ -24,7 +24,7 @@ describe TTT::Web::IndexController do
   it 'returns index html with board sizes' do
     response = index_controller.call({})
     html_response = response[2][0]
-    TTT::Game::BOARD_SIZES.each do |board_size|
+    TicTacToe::Game::BOARD_SIZES.each do |board_size|
       expect(html_response).to include(board_size.to_s)
     end
   end

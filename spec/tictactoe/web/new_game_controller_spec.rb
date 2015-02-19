@@ -1,12 +1,11 @@
-require 'new_game_controller'
-require 'tictactoe'
+require 'tictactoe/web/new_game_controller'
 require 'rack/test'
 
-describe TTT::Web::NewGameController do
+describe TicTacToe::Web::NewGameController do
   include Rack::Test::Methods
 
   let(:game_type) { 'Human Vs Human' }
-  let(:new_game_controller) { TTT::Web::NewGameController.new}
+  let(:new_game_controller) { TicTacToe::Web::NewGameController.new}
 
   def app
     new_game_controller
@@ -28,7 +27,7 @@ describe TTT::Web::NewGameController do
   it 'adds empty board to redirect url' do
     get('/', {'game_type' => game_type, 'board_size' => '3'})
     follow_redirect!
-    board = TTT::Web::BoardWebPresenter.to_board(last_request.params['board'])
+    board = TicTacToe::Web::BoardWebPresenter.to_board(last_request.params['board'])
     expect(board.empty_positions.size).to eq(9)
   end
 end

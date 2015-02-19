@@ -1,8 +1,10 @@
 require 'rack'
-require 'tictactoe'
-require 'url_helper'
+require 'tictactoe/game'
+require 'tictactoe/board'
+require 'tictactoe/board_web_presenter'
+require 'tictactoe/web/url_helper'
 
-module TTT
+module TicTacToe
   module Web
     class NewGameController
       include Rack::Utils
@@ -10,7 +12,7 @@ module TTT
       def call(env)
         req = Rack::Request.new(env)
         game_type = extract_game_type(req)
-        board = TTT::Board.new(extract_board_size(req))
+        board = TicTacToe::Board.new(extract_board_size(req))
         redirect_to_play_turn_page(BoardWebPresenter.to_web_object(board), game_type)
       end
 
@@ -18,12 +20,12 @@ module TTT
 
       def redirect_to_play_turn_page(board_positions, game_type)
         response = Rack::Response.new
-        response.redirect(TTT::Web::URLHelper.play_turn_url(game_type, board_positions))
+        response.redirect(TicTacToe::Web::URLHelper.play_turn_url(game_type, board_positions))
         response.finish
       end
 
       def prepare_game(game_type, board_size)
-        TTT::Game.build_game(TTT::AsyncInterface.new, game_type, board_size)
+        TicTacToe::Game.build_game(TicTacToe::AsyncInterface.new, game_type, board_size)
       end
 
       def extract_game_type(request)
