@@ -18,11 +18,11 @@ module TicTacToe
       def call(env)
         request = Rack::Request.new(env)
         game = build_game_from_params(request)
-        play_game(game, request)
+        play_turn(game, request)
         generate_response(request, game)
       end
 
-      def play_game(game, request)
+      def play_turn(game, request)
         if game.current_player_is_computer?
           game.play_turn
         else
