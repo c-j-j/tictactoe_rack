@@ -53,7 +53,7 @@ module TicTacToe
       def calcuate_display_fields(request, game)
         @game_presenter = game.presenter
         @computer_has_next_turn = game.current_player_is_computer?
-        @next_turn_url = TicTacToe::Web::URLHelper.play_turn_url(extract_game_type(request), BoardWebPresenter.to_web_object(game.board))
+        @next_turn_url = TicTacToe::Web::URLHelper.play_turn_url(extract_game_type(request), BoardWebPresenter.to_web_object(@game_presenter.board_positions))
       end
 
       def extract_game_type(request)

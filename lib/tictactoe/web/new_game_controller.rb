@@ -10,10 +10,12 @@ module TicTacToe
       include Rack::Utils
 
       def call(env)
+        puts "New Game Controller called"
         req = Rack::Request.new(env)
         game_type = extract_game_type(req)
-        board = TicTacToe::Board.new(extract_board_size(req))
-        redirect_to_play_turn_page(BoardWebPresenter.to_web_object(board), game_type)
+        puts extract_board_size(req)
+        game = TicTacToe::Game.build_game(extract_game_type(req), extract_board_size(req))
+        redirect_to_play_turn_page(BoardWebPresenter.to_web_object(game.presenter.board_positions), game_type)
       end
 
       private
@@ -22,10 +24,6 @@ module TicTacToe
         response = Rack::Response.new
         response.redirect(TicTacToe::Web::URLHelper.play_turn_url(game_type, board_positions))
         response.finish
-      end
-
-      def prepare_game(game_type, board_size)
-        TicTacToe::Game.build_game(TicTacToe::AsyncInterface.new, game_type, board_size)
       end
 
       def extract_game_type(request)
