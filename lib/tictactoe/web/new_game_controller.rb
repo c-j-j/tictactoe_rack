@@ -10,11 +10,9 @@ module TicTacToe
       include Rack::Utils
 
       def call(env)
-        puts "New Game Controller called"
         req = Rack::Request.new(env)
         game_type = extract_game_type(req)
-        puts extract_board_size(req)
-        game = TicTacToe::Game.build_game(extract_game_type(req), extract_board_size(req))
+        game = TicTacToe::Game.build_game(game_type, extract_board_size(req))
         redirect_to_play_turn_page(BoardWebPresenter.to_web_object(game.presenter.board_positions), game_type)
       end
 
