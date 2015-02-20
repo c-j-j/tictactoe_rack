@@ -26,7 +26,7 @@ describe TicTacToe::Web::NewGameController do
   it 'adds empty board to redirect url' do
     get('/new_game', {'game_type' => game_type, 'board_size' => '3'})
     follow_redirect!
-    board = TicTacToe::BoardPresenter.to_board(last_request.params['board'])
+    board = TicTacToe::GamePresenter.build_board_from_string(last_request.params['board'])
     expect(board.empty_positions.size).to eq(9)
   end
 end

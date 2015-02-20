@@ -1,7 +1,6 @@
 require 'rack'
 require 'tictactoe/game'
 require 'tictactoe/board'
-require 'tictactoe/board_presenter'
 require 'tictactoe/web/url_helper'
 
 module TicTacToe
@@ -13,7 +12,7 @@ module TicTacToe
         req = Rack::Request.new(env)
         game_type = extract_game_type(req)
         game = TicTacToe::Game.build_game(game_type, extract_board_size(req))
-        redirect_to_play_turn_page(game.presenter.board_presenter.as_s, game_type)
+        redirect_to_play_turn_page(game.presenter.board_as_string, game_type)
       end
 
       private

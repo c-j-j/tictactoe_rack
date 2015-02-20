@@ -14,15 +14,13 @@
   <div class="row">
     <div class="col-md-5 col-md-offset-4">
       <h1><strong>Status:</strong> <%= @game_presenter.status %></h1>
-      <% unless @game_presenter.board_presenter.nil? %>
-        <% @game_presenter.board_presenter.as_a.each_with_index do |mark, index| %>
-          <div class="cell"
-            style="width: <%= @game_presenter.cell_size %>; padding-bottom: <%= @game_presenter.cell_size %>;">
-            <a href="<%= @next_turn_url %>&position=<%= index %>">
-              <%= mark %>
-            </a>
-          </div>
-        <% end %>
+      <% @game_presenter.board_as_array.each_with_index do |mark, index| %>
+        <div class="cell"
+          style="width: <%= @game_presenter.cell_size %>; padding-bottom: <%= @game_presenter.cell_size %>;">
+          <a href="<%= @next_turn_url %>&position=<%= index %>">
+            <%= mark %>
+          </a>
+        </div>
       <% end %>
 
       <h3><a href="/">Click Here to set up a new game</a></h3>

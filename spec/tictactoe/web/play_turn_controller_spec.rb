@@ -9,7 +9,7 @@ describe TicTacToe::Web::PlayTurnController do
 
   let(:request) { TicTacToe::Web::StubRequest.new }
   let(:stub_game) { TicTacToe::StubGame.new }
-  let(:board_param) { stub_game.presenter.board_presenter.as_s }
+  let(:board_param) { stub_game.presenter.board_as_string }
   let(:game) { TicTacToe::StubGame.new }
   let(:game_presenter) { OpenStruct.new }
   let(:controller) { TicTacToe::Web::PlayTurnController.new }
