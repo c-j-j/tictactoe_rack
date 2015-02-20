@@ -1,6 +1,6 @@
 require 'rack'
 require 'tictactoe/game'
-require 'tictactoe/board_web_presenter'
+require 'tictactoe/board_presenter'
 require 'tictactoe/web/url_helper'
 
 module TicTacToe
@@ -44,7 +44,7 @@ module TicTacToe
 
       def build_game_from_params(request)
         game_type = extract_game_type(request)
-        board = BoardWebPresenter.to_board(request.params['board'])
+        board = BoardPresenter.to_board(request.params['board'])
         TicTacToe::Game.build_game_with_board(game_type, board)
       end
 
@@ -53,7 +53,7 @@ module TicTacToe
       def calcuate_display_fields(request, game)
         @game_presenter = game.presenter
         @computer_has_next_turn = game.current_player_is_computer?
-        @next_turn_url = TicTacToe::Web::URLHelper.play_turn_url(extract_game_type(request), BoardWebPresenter.to_web_object(@game_presenter.board_positions))
+        @next_turn_url = TicTacToe::Web::URLHelper.play_turn_url(extract_game_type(request), @game_presenter.board_presenter.as_s)
       end
 
       def extract_game_type(request)

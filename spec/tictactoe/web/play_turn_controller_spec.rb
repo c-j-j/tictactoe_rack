@@ -4,12 +4,12 @@ require 'tictactoe/web/stub_request'
 require 'rack/test'
 
 describe TicTacToe::Web::PlayTurnController do
-  let(:request) { TicTacToe::Web::StubRequest.new }
-  let(:stub_game) { TicTacToe::StubGame.new }
-  let(:board_param) { TicTacToe::Web::BoardWebPresenter.to_web_object(stub_game.presenter.board_positions) }
   include Rack::Test::Methods
   include Rack::Utils
 
+  let(:request) { TicTacToe::Web::StubRequest.new }
+  let(:stub_game) { TicTacToe::StubGame.new }
+  let(:board_param) { stub_game.presenter.board_presenter.as_s }
   let(:game) { TicTacToe::StubGame.new }
   let(:game_presenter) { OpenStruct.new }
   let(:controller) { TicTacToe::Web::PlayTurnController.new }
