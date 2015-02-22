@@ -17,6 +17,7 @@ module.exports = function(config) {
     files: [
       "**/*spec.js",
       "stubs/*.js",
+      "helpers/*.js",
       "../../public/javascript/*.js"
     ],
 

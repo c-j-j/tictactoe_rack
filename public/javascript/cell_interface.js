@@ -8,5 +8,3 @@ var CellInterface = function(ajaxCaller, responseHandler){
 CellInterface.prototype.cellClicked = function(cell){
   this.ajaxCaller.send(CONFIG.addMoveUrl, this.responseHandler);
 }
-
-
