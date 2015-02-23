@@ -27,3 +27,5 @@ function addQueryParameters(data)
 function domElement(id){
   return document.getElementById(id).innerHTML;
 }
+
+var cellInterface = new CellInterface(new AjaxSender, JsonResponseHandler);

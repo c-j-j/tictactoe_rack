@@ -8,20 +8,18 @@ module TicTacToe
     class NewGameController
       include Rack::Utils
 
+      NEW_GAME_VIEW = File.dirname(__FILE__) + '/views/new_game.html.erb'
+
       def call(env)
         req = Rack::Request.new(env)
-        game_type = extract_game_type(req)
-        game = TicTacToe::Game.build_game(game_type, extract_board_size(req))
-        redirect_to_play_turn_page(game.presenter.board_as_string, game_type)
+        @game_type = extract_game_type(req)
+        game = TicTacToe::Game.build_game(@game_type, extract_board_size(req))
+        @game_presenter = game.presenter
+        [200, {'Content-Type' => 'text/html'},
+         [ERB.new(File.new(NEW_GAME_VIEW, "r").read).result(binding) ]]
       end
 
       private
-
-      def redirect_to_play_turn_page(board_positions, game_type)
-        response = Rack::Response.new
-        response.redirect(TicTacToe::Web::URLHelper.play_turn_url(game_type, board_positions))
-        response.finish
-      end
 
       def extract_game_type(request)
         request.params['game_type']

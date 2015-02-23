@@ -19,6 +19,7 @@ module.exports = function(config) {
       "spec/javascripts/fixtures/**/*",
       "spec/javascripts/**/*spec.js",
       "spec/javascripts/stubs/*.js",
+      "public/javascript/json_response_handler.js",
       "public/javascript/*.js"
     ],
 

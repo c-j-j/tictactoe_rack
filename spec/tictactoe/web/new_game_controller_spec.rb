@@ -11,22 +11,21 @@ describe TicTacToe::Web::NewGameController do
     new_game_controller
   end
 
-  it 'redirects to play turn controller' do
+  it 'returns 200 status code' do
     get('/new_game', {'game_type' => 'Human Vs Human', 'board_size' => '3'})
-    follow_redirect!
-    expect(last_request.url).to include('play_turn')
+    expect(last_response.ok?).to eq(true)
   end
 
-  it 'adds game type in redirect url' do
-    get('/new_game', {'game_type' => game_type, 'board_size' => '3'})
-    follow_redirect!
-    expect(last_request.params['game_type']).to eq(game_type)
+  it 'includes board parameter hidden in response' do
+    get('/new_game', {'game_type' => TicTacToe::Game::HVH, 'board_size' => '3'})
+    game = TicTacToe::Game.build_game(TicTacToe::Game::HVH, 3)
+    board_param = game.presenter.board_as_string
+    expect(last_response.body).to include(board_param)
   end
 
-  it 'adds empty board to redirect url' do
-    get('/new_game', {'game_type' => game_type, 'board_size' => '3'})
-    follow_redirect!
-    board = TicTacToe::GamePresenter.build_board_from_string(last_request.params['board'])
-    expect(board.empty_positions.size).to eq(9)
+  it 'includes game type hidden in response' do
+    get('/new_game', {'game_type' => TicTacToe::Game::HVH, 'board_size' => '3'})
+    expect(last_response.body).to include(TicTacToe::Game::HVH)
   end
+
 end
