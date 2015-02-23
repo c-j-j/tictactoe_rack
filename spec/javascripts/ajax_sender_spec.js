@@ -12,14 +12,10 @@ describe('Ajax Sender Tests', function(){
 
   it("creates class", function(){
     var ajaxSender = new AjaxSender();
- //jasmine.Ajax.requests.mostRecent().response({
-      //"status": 200,
-      //"responseText": "some response"
-    //});
     expect(ajaxSender).not.toBeNull();
   });
 
-  it("invokes response handler with response", function(){
+  it("calls response handler with ajax response", function(){
     jasmine.Ajax.stubRequest('/some_url').andReturn({
       "responseText": 'some response'
     });
