@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <title>TicTacToe</title>
 <link rel="stylesheet" href="/css/main.css">
-<script>
-localStorage.setItem("REMOTE_IP", "http://localhost:8765");
-</script>
+<% unless @remote_ip.nil? %>
+  <script>
+localStorage.setItem("REMOTE_IP", <%= @remote_ip %>);
+  </script>
+<% end %>
 
 <script type="text/javascript" src="javascript/json_response_handler.js"></script>
 <script type="text/javascript" src="javascript/factory/url_factory.js"></script>
