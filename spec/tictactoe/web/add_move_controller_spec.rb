@@ -5,7 +5,7 @@ require 'rack/test'
 describe TicTacToe::Web::AddMoveController do
   let(:stub_game) { TicTacToe::StubGame.new }
   let(:controller) { TicTacToe::Web::AddMoveController.new }
-  let(:game) { TicTacToe::Game.build_game(TicTacToe::Game::HVH, 3) }
+  let(:reference_game) { TicTacToe::Game.build_game(TicTacToe::Game::HVH, 3) }
   include Rack::Test::Methods
   include TicTacToe::Web
 
@@ -25,14 +25,14 @@ describe TicTacToe::Web::AddMoveController do
     call_url_and_update_reference_game
 
     response = JSON.parse(last_response.body)
-    expect(response['status']).to eq(game.presenter.status)
+    expect(response['status']).to eq(reference_game.presenter.status)
   end
 
   it 'returns board param in json response' do
     call_url_and_update_reference_game
     response = JSON.parse(last_response.body)
 
-    expect(response['board_param']).to eq(game.presenter.board_as_string)
+    expect(response['board_param']).to eq(reference_game.presenter.board_as_string)
   end
 
   it 'returns board array in json response' do
@@ -55,9 +55,10 @@ describe TicTacToe::Web::AddMoveController do
   def call_url_and_update_reference_game
     get('/add_move',
         {TicTacToe::Web::GAME_TYPE_PARAM => TicTacToe::Game::HVH,
-         TicTacToe::Web::BOARD_PARAM => game.presenter.board_as_string,
+         TicTacToe::Web::BOARD_PARAM => reference_game.presenter.board_as_string,
          TicTacToe::Web::POSITION_PARAM => 0}
        )
-    game.add_move(0)
+    reference_game.add_move(0)
   end
+
 end
