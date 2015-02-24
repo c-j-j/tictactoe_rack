@@ -39,4 +39,9 @@ describe('GameClient Tests', function(){
     expect(ajaxCaller.responseHandlerUsed).toEqual('responseHandler');
   });
 
+  it("calls ajax caller with play turn url", function() {
+    gameClient.playTurn();
+    expect(ajaxCaller.urlSentTo).toContain('/play_turn');
+  });
+
 });

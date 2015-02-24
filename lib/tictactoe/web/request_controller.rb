@@ -2,6 +2,7 @@ require 'rack'
 require 'tictactoe/web/index_controller'
 require 'tictactoe/web/new_game_controller'
 require 'tictactoe/web/add_move_controller'
+require 'tictactoe/web/game_play_controller'
 
 module TicTacToe
   module Web
