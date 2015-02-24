@@ -1,4 +1,3 @@
-#\ -w -p 8765
 use Rack::Reloader, 0
 use Rack::ContentLength
 
