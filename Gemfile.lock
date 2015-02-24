@@ -1,7 +1,8 @@
-PATH
-  remote: /Users/chrisjordan/ruby_projects/tictactoe/tictactoe_game
+GIT
+  remote: git://github.com/c-j-j/tictactoe_game
+  revision: 860abf9e77100e0d53a3f9faa70ebf5f220d2610
   specs:
-    tictactoe (1.0.1)
+    tictactoe (1.0.2)
 
 GEM
   remote: https://rubygems.org/
@@ -30,4 +31,4 @@ PLATFORMS
 DEPENDENCIES
   rack-test
   rspec
-  tictactoe!
+  tictactoe (= 1.0.2)!

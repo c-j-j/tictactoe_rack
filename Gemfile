@@ -1,7 +1,7 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem 'tictactoe', :path => '/Users/chrisjordan/ruby_projects/tictactoe/tictactoe_game'
+gem "tictactoe", '1.0.2',  :git => "git://github.com/c-j-j/tictactoe_game"
 
 group :test do
     gem 'rspec'
