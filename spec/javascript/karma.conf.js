@@ -15,12 +15,14 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      "spec/javascripts/helpers/*.js",
-      "spec/javascripts/fixtures/**/*",
-      "spec/javascripts/**/*spec.js",
-      "spec/javascripts/stubs/*.js",
       "public/javascript/json_response_handler.js",
-      "public/javascript/*.js"
+      "public/javascript/factory/url_factory.js",
+      "public/javascript/storage.js",
+      "public/javascript/*.js",
+      "spec/javascript/helpers/*.js",
+      "spec/javascript/fixtures/**/*",
+      "spec/javascript/**/*spec.js",
+      "spec/javascript/stubs/*.js"
     ],
 
 

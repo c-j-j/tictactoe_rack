@@ -4,10 +4,15 @@
 <meta charset="UTF-8">
 <title>TicTacToe</title>
 <link rel="stylesheet" href="/css/main.css">
+<script>
+localStorage.setItem("REMOTE_IP", "http://localhost:8765");
+</script>
+
 <script type="text/javascript" src="javascript/json_response_handler.js"></script>
+<script type="text/javascript" src="javascript/factory/url_factory.js"></script>
+<script type="text/javascript" src="javascript/storage.js"></script>
 <script type="text/javascript" src="javascript/ajax_sender.js"></script>
-<script type="text/javascript" src="javascript/cell_interface.js"></script>
-<script type="text/javascript" src="javascript/config.js"></script>
+<script type="text/javascript" src="javascript/game_client.js"></script>
 </head>
 <body>
 <section>
@@ -20,7 +25,7 @@
   <% @game_presenter.board_as_array.each_with_index do |mark, index| %>
     <div class="cell"
       style="width: <%= @game_presenter.cell_size %>; padding-bottom: <%= @game_presenter.cell_size %>;">
-      <a id=<%="cell#{index}" %> href="#" onclick="cellInterface.cellClicked(<%= index %>); return false;">
+      <a id=<%="cell#{index}" %> href="#" onclick="gameClient.cellClicked(<%= index %>); return false;">
         <%= mark %>
       </a>
     </div>
