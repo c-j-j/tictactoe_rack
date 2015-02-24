@@ -29,6 +29,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  rack
   rack-test
   rspec
   tictactoe (= 1.0.2)!
