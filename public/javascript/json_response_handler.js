@@ -3,8 +3,7 @@
 var JsonResponseHandler = function(json){
   var response = JSON.parse(json);
   updateDOMElementById("status", response.status);
-  var board = response.board;
-  updateCells(board);
+  updateCells(response.board);
   updateDOMElementById("board_param", response.board_param);
   updateDOMElementById("computer_going_next", response.computer_going_next);
 }

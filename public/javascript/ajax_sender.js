@@ -7,9 +7,7 @@ AjaxSender.prototype.send = function(url, responseHandler){
   var xmlHttpRequest = new XMLHttpRequest();
   xmlHttpRequest.onreadystatechange = function(){
     if(this.readyState == this.DONE){
-      var responseText = xmlHttpRequest.responseText;
-      console.log("Received: " + responseText);
-      responseHandler(responseText);
+      responseHandler(xmlHttpRequest.responseText);
     }
   }
 

@@ -5,7 +5,6 @@ var GameClient = function(ajaxCaller, responseHandler){
   this.responseHandler = responseHandler;
 }
 
-var urlFactory = new URLFactory(new Storage());
 
 GameClient.prototype.cellClicked = function(cell){
   var queryParams = {
@@ -14,6 +13,7 @@ GameClient.prototype.cellClicked = function(cell){
     "game_type": domElement("game_type_param")
   };
 
+  var urlFactory = new URLFactory(new Storage());
   var url = urlFactory.getAddMoveURL() + addQueryParameters(queryParams);
   this.ajaxCaller.send(url, this.responseHandler);
 }
