@@ -1,7 +1,6 @@
 require 'rack'
 require 'tictactoe/web/index_controller'
 require 'tictactoe/web/new_game_controller'
-require 'tictactoe/web/play_turn_controller'
 require 'tictactoe/web/add_move_controller'
 
 module TicTacToe
@@ -16,10 +15,6 @@ module TicTacToe
 
           map '/new_game' do
             run TicTacToe::Web::NewGameController.new
-          end
-
-          map '/play_turn' do
-            run TicTacToe::Web::PlayTurnController.new
           end
 
           map '/add_move' do
