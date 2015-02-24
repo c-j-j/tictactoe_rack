@@ -3,11 +3,12 @@ require 'tictactoe/stubs/stub_game'
 require 'rack/test'
 
 describe TicTacToe::Web::AddMoveController do
+  include Rack::Test::Methods
+  include TicTacToe::Web
+
   let(:game_play_controller) { double('game_play_controller') }
   let(:stub_game) { TicTacToe::StubGame.new }
   let(:reference_game) { TicTacToe::Game.build_game(TicTacToe::Game::HVH, 3) }
-  include Rack::Test::Methods
-  include TicTacToe::Web
 
   let(:game_type) { 'Human Vs Human' }
   let(:add_move_controller) { TicTacToe::Web::AddMoveController.new }
