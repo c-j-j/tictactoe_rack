@@ -17,7 +17,7 @@ describe('GameClient Tests', function(){
     expect(gameClient.responseHandler).toEqual('responseHandler');
   });
 
-  it("calls ajax caller with add move url", function() {
+  it("calls ajax sender with add move url", function() {
     gameClient.cellClicked(0);
     expect(ajaxCaller.urlSentTo).toContain(urlFactory.getAddMoveURL());
     expect(ajaxCaller.urlSentTo).toContain("?");
@@ -34,14 +34,23 @@ describe('GameClient Tests', function(){
     expect(ajaxCaller.urlSentTo).toContain('game_type=HVH');
   });
 
-  it("calls ajax caller with response handler", function() {
+  it("calls ajax sender with response handler", function() {
     gameClient.cellClicked(0);
     expect(ajaxCaller.responseHandlerUsed).toEqual('responseHandler');
   });
 
-  it("calls ajax caller with play turn url", function() {
+  it("calls ajax sender with play turn url", function() {
     gameClient.playTurn();
     expect(ajaxCaller.urlSentTo).toContain('/play_turn');
   });
 
+  it("adds board parameter when calling play turn", function() {
+    gameClient.playTurn();
+    expect(ajaxCaller.urlSentTo).toContain('board=some_board_param');
+  });
+
+  it("adds game type parameter when calling play turn", function() {
+    gameClient.playTurn();
+    expect(ajaxCaller.urlSentTo).toContain('game_type=HVH');
+  });
 });

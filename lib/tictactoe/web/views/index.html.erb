@@ -1,42 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title></title>
-<link rel="stylesheet" href="css/main.css">
-<script type="text/javascript" src="javascript/ajax_sender.js"></script>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/main.css">
+    <script type="text/javascript" src="javascript/ajax_sender.js"></script>
 </head>
+
 <body>
-<section>
-  <heading>
-    <h1>TicTacToe</h1>
-  </heading>
+    <section>
+        <heading>
+            <h1>TicTacToe</h1>
+        </heading>
 
-  <form action="new_game" method="GET">
-    <div>
-      <label for="GameType">Select Game Type</label>
+        <form action="new_game" method="GET">
+            <div>
+                <label for="GameType">Select Game Type</label>
 
-      <select name="game_type" id="GameType">
-        <% for game_type in game_types %>
-          <option value="<%= game_type %>"><%= game_type %></option>
-        <% end %>
-      </select>
-    </div>
+                <select name="game_type" id="GameType">
+                    <% for game_type in game_types %>
+                        <option value="<%= game_type %>">
+                            <%=g ame_type %>
+                        </option>
+                        <% end %>
+                </select>
+            </div>
 
-    <div>
-      <label for="BoardSize">Select Board Size (number of rows)</label>
-      <select name="board_size">
-        <% for board_size in board_sizes %>
-          <option value="<%= board_size %>"><%= board_size %></option>
-        <% end %>
-      </select>
-    </div>
+            <div>
+                <label for="BoardSize">Select Board Size (number of rows)</label>
+                <select name="board_size">
+                    <% for board_size in board_sizes %>
+                        <option value="<%= board_size %>">
+                            <%=b oard_size %>
+                        </option>
+                        <% end %>
+                </select>
+            </div>
 
-    <input type="submit" class="btn btn-default" value="Play New Game">
+            <input type="submit" class="btn btn-default" value="Play New Game">
 
-  </form>
-</section>
+        </form>
+    </section>
 </body>
-</html>
 
+</html>
 
