@@ -28,6 +28,7 @@ namespace :server do
   task :run_with_cs do
     ENV['USE_COFFEESCRIPT'] = true.to_s
     Rake::Task['js:compile'].invoke
+    puts "Starting rack server"
     `rackup`
   end
 end
