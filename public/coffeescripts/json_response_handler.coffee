@@ -11,5 +11,5 @@ class CoffeeClient.JsonResponseHandler
     for cellIndex in [0...board.length]
       updateDOMElement("cell#{cellIndex}", board[cellIndex])
 
- updateDOMElement = (idOfElement, value)->
+  updateDOMElement = (idOfElement, value)->
     document.getElementById(idOfElement).innerHTML = value
