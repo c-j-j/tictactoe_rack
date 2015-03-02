@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="css/main.css">
-    <script type="text/javascript" src="javascript/ajax_sender.js"></script>
+    <script type="text/javascript" src="javascripts/ajax_sender.js"></script>
+    <script type="text/javascript" src="javascripts/test.js"></script>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
                 <select name="game_type" id="GameType">
                     <% for game_type in game_types %>
                         <option value="<%= game_type %>">
-                            <%=g ame_type %>
+                            <%= game_type %>
                         </option>
                         <% end %>
                 </select>
@@ -32,7 +33,7 @@
                 <select name="board_size">
                     <% for board_size in board_sizes %>
                         <option value="<%= board_size %>">
-                            <%=b oard_size %>
+                            <%= board_size %>
                         </option>
                         <% end %>
                 </select>

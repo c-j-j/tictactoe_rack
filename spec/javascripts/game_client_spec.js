@@ -8,7 +8,7 @@ describe('GameClient Tests', function(){
   beforeEach(function(){
     ajaxCaller = new AjaxSenderSpy();
     gameClient = new GameClient(ajaxCaller, 'responseHandler');
-    jasmine.getFixtures().fixturesPath = 'base/spec/javascript/fixtures/';
+    jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures/';
     loadFixtures('hidden_params_fixture.html');
   });
 

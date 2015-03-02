@@ -7,10 +7,23 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    coffee-script (2.3.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.9.0)
     diff-lcs (1.2.5)
+    execjs (2.3.0)
+    jasmine (2.2.0)
+      jasmine-core (~> 2.2)
+      phantomjs
+      rack (>= 1.2.1)
+      rake
+    jasmine-core (2.2.0)
+    phantomjs (1.9.8.0)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rake (10.4.2)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -29,6 +42,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  coffee-script
+  jasmine
   rack
   rack-test
   rspec

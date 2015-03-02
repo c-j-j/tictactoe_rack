@@ -1,41 +1,49 @@
 // Karma configuration
 // Generated on Sun Feb 22 2015 14:26:06 GMT+0000 (GMT)
-
 module.exports = function(config) {
-  config.set({
-
-    // base path that will be used to resolve all patterns (eg. files, exclude)
+  config.set({ // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '../../',
-
-
-    // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine-jquery', 'jasmine'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      "public/javascript/json_response_handler.js",
-      "public/javascript/factory/url_factory.js",
-      "public/javascript/storage.js",
-      "public/javascript/*.js",
-      "spec/javascript/helpers/*.js",
-      "spec/javascript/fixtures/**/*",
-      "spec/javascript/**/*spec.js",
-      "spec/javascript/stubs/*.js"
+      "public/javascripts/json_response_handler.js",
+      "public/javascripts/factory/url_factory.js",
+      "public/javascripts/storage.js",
+      "public/javascripts/*.js",
+      "spec/javascripts/helpers/*.js",
+      "spec/javascripts/fixtures/**/*",
+      "spec/javascripts/**/*spec.js",
+      "spec/javascripts/stubs/*.js",
+      "public/coffeescripts/namespace.coffee",
+      "public/coffeescripts/**/*.coffee",
+      "spec/coffeescripts/**/*.coffee"
     ],
 
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      '**/*.coffee': ['coffee']
     },
 
+    coffeePreprocessor: {
+      // options passed to the coffee compiler
+      options: {
+        bare: true,
+        sourceMap: false
+      },
+      // transforming the filenames
+      transformPath: function(path) {
+        return path.replace(/\.coffee$/, '.js');
+      }
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -57,7 +65,7 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
 
     // start these browsers
@@ -67,6 +75,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true
+    singleRun: false
   });
 };

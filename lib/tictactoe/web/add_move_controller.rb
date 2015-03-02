@@ -24,8 +24,6 @@ module TicTacToe
       end
 
       def process_user_move(game, played_position)
-        game.play_turn(HumanPlayer.new(played_position))
-
         if game.move_valid?(played_position)
           game.add_move(played_position)
         end

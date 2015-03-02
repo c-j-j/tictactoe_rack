@@ -3,7 +3,7 @@
 describe('Response Handler Tests', function(){
 
   beforeEach(function(){
-    jasmine.getFixtures().fixturesPath = 'base/spec/javascript/fixtures/';
+    jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures/';
     loadFixtures('play_turn_fixture.html')
   });
 
