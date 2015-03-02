@@ -29,6 +29,7 @@ namespace :server do
     ENV['USE_COFFEESCRIPT'] = true.to_s
     Rake::Task['js:compile'].invoke
     puts "Starting rack server"
-    `rackup`
+    puts "port = #{ENV['PORT']}"
+    `rackup -p 8765`
   end
 end
