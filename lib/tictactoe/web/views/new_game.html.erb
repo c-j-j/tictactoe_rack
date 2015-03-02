@@ -7,14 +7,23 @@
 <% unless @remote_ip.nil? %>
   <script>
 localStorage.setItem("REMOTE_IP", <%= @remote_ip %>);
-  </script>
+</script>
 <% end %>
 
-<script type="text/javascript" src="javascripts/json_response_handler.js"></script>
-<script type="text/javascript" src="javascripts/factory/url_factory.js"></script>
-<script type="text/javascript" src="javascripts/storage.js"></script>
-<script type="text/javascript" src="javascripts/ajax_sender.js"></script>
-<script type="text/javascript" src="javascripts/game_client.js"></script>
+<% if ENV['USE_COFFEESCRIPT'] %>
+  <script type="text/javascript" src="javascripts/cs/namespace.js"></script>
+  <script type="text/javascript" src="javascripts/cs/json_response_handler.js"></script>
+  <script type="text/javascript" src="javascripts/cs/ajax_caller.js"></script>
+  <script type="text/javascript" src="javascripts/cs/game_client.js"></script>
+  <script type="text/javascript" src="javascripts/cs/config.js"></script>
+  <script type="text/javascript" src="javascripts/cs/main.js"></script>
+<% else %>
+  <script type="text/javascript" src="javascripts/json_response_handler.js"></script>
+  <script type="text/javascript" src="javascripts/factory/url_factory.js"></script>
+  <script type="text/javascript" src="javascripts/storage.js"></script>
+  <script type="text/javascript" src="javascripts/ajax_sender.js"></script>
+  <script type="text/javascript" src="javascripts/game_client.js"></script>
+<% end %>
 </head>
 <body>
 <section>
@@ -26,12 +35,12 @@ localStorage.setItem("REMOTE_IP", <%= @remote_ip %>);
   <h1 id="status"><%= @game_presenter.status %></h1>
   <% @game_presenter.board_as_array.each_with_index do |mark, index| %>
     <div class="cell"
-      style="width: <%= @game_presenter.cell_size %>; padding-bottom: <%= @game_presenter.cell_size %>;">
-      <a id=<%="cell#{index}" %> href="#" onclick="gameClient.cellClicked(<%= index %>); return false;">
-        <%= mark %>
-      </a>
-    </div>
-  <% end %>
+    style="width: <%= @game_presenter.cell_size %>; padding-bottom: <%= @game_presenter.cell_size %>;">
+    <a id=<%="cell#{index}" %> href="#" onclick="gameClient.cellClicked(<%= index %>); return false;">
+      <%= mark %>
+    </a>
+  </div>
+<% end %>
 
   <h3><a href="/">Click here to set up a new game</a></h3>
 </section>

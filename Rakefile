@@ -19,8 +19,14 @@ namespace :js do
 end
 
 namespace :server do
-  desc "run rack server with prerequisites"
-  task :run do
+  desc "run rack server with javascript files"
+  task :run_with_js do
+    `rackup`
+  end
+
+  desc "run rack server with compiled coffeescript files"
+  task :run_with_cs do
+    ENV['USE_COFFEESCRIPT'] = true.to_s
     Rake::Task['js:compile'].invoke
     `rackup`
   end
