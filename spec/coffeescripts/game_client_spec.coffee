@@ -19,7 +19,7 @@ describe 'game client', ->
     expect(ajaxCaller.urlSent).toContain('board=some_board_param')
     expect(ajaxCaller.urlSent).toContain('game_type=HVH')
 
-  it 'calls ajax sender with parsed in response handler', ->
+  it 'calls ajax sender with response handler', ->
     expect(gameClient.cellClicked(0))
     expect(ajaxCaller.responseHandlerUsed).toEqual('response_handler')
 
