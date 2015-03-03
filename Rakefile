@@ -1,11 +1,11 @@
 require 'coffee-script'
 
 namespace :js do
-  desc "compile coffee-scripts from ./public/coffeescripts to ./public/javascripts/cs"
+  desc "compile coffee-scripts from ./public/coffeescripts/src to ./public/coffeescripts/lib"
   task :compile do
     puts "Compiling coffeescript"
-    source = "#{File.dirname(__FILE__)}/public/coffeescripts/"
-    javascripts = "#{File.dirname(__FILE__)}/public/javascripts/cs/"
+    source = "#{File.dirname(__FILE__)}/public/coffeescripts/src/"
+    javascripts = "#{File.dirname(__FILE__)}/public/coffeescripts/lib/"
 
     Dir.foreach(source) do |cf|
       unless cf == '.' || cf == '..'

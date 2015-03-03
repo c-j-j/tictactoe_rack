@@ -2,7 +2,7 @@
 // Generated on Sun Feb 22 2015 14:26:06 GMT+0000 (GMT)
 module.exports = function(config) {
   config.set({ // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '../../',
+    basePath: '../',
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine-jquery', 'jasmine'],
 
@@ -17,8 +17,8 @@ module.exports = function(config) {
       "spec/javascripts/fixtures/**/*",
       "spec/javascripts/**/*spec.js",
       "spec/javascripts/stubs/*.js",
-      "public/coffeescripts/namespace.coffee",
-      "public/coffeescripts/**/*.coffee",
+      "public/coffeescripts/src/namespace.coffee",
+      "public/coffeescripts/src/**/*.coffee",
       "spec/coffeescripts/**/*.coffee"
     ],
 

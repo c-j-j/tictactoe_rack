@@ -4,7 +4,7 @@ use Rack::ContentLength
 $:<< File.join(File.dirname(__FILE__), 'lib')
 
 use Rack::Static,
-  :urls => ["/images", "/javascript", "/css"],
+  :urls => ["/images", "/javascript", "/coffeescripts", "/css"],
   :root => "public"
 
 require 'tictactoe/web/request_controller'

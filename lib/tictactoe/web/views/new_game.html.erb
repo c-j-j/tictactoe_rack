@@ -11,12 +11,12 @@ localStorage.setItem("REMOTE_IP", <%= @remote_ip %>);
 <% end %>
 
 <% if ENV['USE_COFFEESCRIPT'] %>
-  <script type="text/javascript" src="javascripts/cs/namespace.js"></script>
-  <script type="text/javascript" src="javascripts/cs/json_response_handler.js"></script>
-  <script type="text/javascript" src="javascripts/cs/ajax_caller.js"></script>
-  <script type="text/javascript" src="javascripts/cs/game_client.js"></script>
-  <script type="text/javascript" src="javascripts/cs/config.js"></script>
-  <script type="text/javascript" src="javascripts/cs/main.js"></script>
+  <script type="text/javascript" src="coffeescripts/lib/namespace.js"></script>
+  <script type="text/javascript" src="coffeescripts/lib/json_response_handler.js"></script>
+  <script type="text/javascript" src="coffeescripts/lib/ajax_caller.js"></script>
+  <script type="text/javascript" src="coffeescripts/lib/game_client.js"></script>
+  <script type="text/javascript" src="coffeescripts/lib/config.js"></script>
+  <script type="text/javascript" src="coffeescripts/lib/main.js"></script>
 <% else %>
   <script type="text/javascript" src="javascripts/json_response_handler.js"></script>
   <script type="text/javascript" src="javascripts/factory/url_factory.js"></script>
