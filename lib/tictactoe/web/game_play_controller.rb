@@ -26,7 +26,11 @@ module TicTacToe
       end
 
       def build_game_from_params(board_param, game_type)
-        board = TicTacToe::GamePresenter.build_board_from_string(board_param)
+        if board_param.nil?
+          board = Board.new(3)
+        else
+          board = TicTacToe::GamePresenter.build_board_from_string(board_param)
+        end
         TicTacToe::Game.build_game_with_board(game_type, board)
       end
 

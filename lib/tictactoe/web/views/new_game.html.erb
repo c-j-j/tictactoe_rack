@@ -19,7 +19,6 @@ localStorage.setItem("REMOTE_IP", <%= @remote_ip %>);
   <script type="text/javascript" src="coffeescripts/lib/main.js"></script>
 <% else %>
   <script type="text/javascript" src="javascripts/json_response_handler.js"></script>
-  <script type="text/javascript" src="javascripts/factory/url_factory.js"></script>
   <script type="text/javascript" src="javascripts/storage.js"></script>
   <script type="text/javascript" src="javascripts/ajax_sender.js"></script>
   <script type="text/javascript" src="javascripts/game_client.js"></script>
@@ -28,9 +27,7 @@ localStorage.setItem("REMOTE_IP", <%= @remote_ip %>);
 <body>
 <section>
   <div hidden>
-    <output id="board_param"><%= @game_presenter.board_as_string %></output>
     <output id="game_type_param"><%= @game_type %></output>
-    <output id="computer_going_next">false</output>
   </div>
   <h1 id="status"><%= @game_presenter.status %></h1>
   <% @game_presenter.board_as_array.each_with_index do |mark, index| %>

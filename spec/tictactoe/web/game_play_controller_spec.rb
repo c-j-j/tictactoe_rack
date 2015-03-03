@@ -30,6 +30,12 @@ describe TicTacToe::Web::GamePlayController do
     expect(json_payload['board_param']).to eq(reference_game.presenter.board_as_string)
   end
 
+  it 'creates new board when no board passed in' do
+    response = game_play_controller.play_turn(nil, TicTacToe::Game::HVH){}
+    json_payload = extract_json_payload(response)
+    expect(json_payload['board_param']).to eq(reference_game.presenter.board_as_string)
+  end
+
   it 'returns board array in json response' do
     response = game_play_controller.play_turn(board_param, TicTacToe::Game::HVH){}
     json_payload = extract_json_payload(response)

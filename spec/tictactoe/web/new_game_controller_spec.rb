@@ -16,13 +16,6 @@ describe TicTacToe::Web::NewGameController do
     expect(last_response.ok?).to eq(true)
   end
 
-  it 'includes board parameter hidden in response' do
-    get('/new_game', {'game_type' => TicTacToe::Game::HVH, 'board_size' => '3'})
-    game = TicTacToe::Game.build_game(TicTacToe::Game::HVH, 3)
-    board_param = game.presenter.board_as_string
-    expect(last_response.body).to include(board_param)
-  end
-
   it 'includes game type hidden in response' do
     get('/new_game', {'game_type' => TicTacToe::Game::HVH, 'board_size' => '3'})
     expect(last_response.body).to include(TicTacToe::Game::HVH)

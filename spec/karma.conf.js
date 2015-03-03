@@ -10,7 +10,6 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       "public/javascripts/json_response_handler.js",
-      "public/javascripts/factory/url_factory.js",
       "public/javascripts/storage.js",
       "public/javascripts/*.js",
       "spec/javascripts/helpers/*.js",

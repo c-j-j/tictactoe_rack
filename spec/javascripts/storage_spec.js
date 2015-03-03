@@ -2,9 +2,10 @@
 
 describe('Storage Tests', function(){
 
-  it("retrives remote IP from localstorage", function(){
-    localStorage.setItem("REMOTE_IP", "someRemoteIP");
+  it("sets and gets value", function(){
     var storage = new Storage()
-    expect(storage.getRemoteIP()).toEqual("someRemoteIP");
+
+    storage.setItem("someKeyName", "someValue")
+    expect(storage.getItem("someKeyName")).toEqual("someValue");
   });
 });

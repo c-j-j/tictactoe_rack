@@ -1,18 +1,18 @@
 'use strict';
 
-var AjaxSender = function(){
-};
+var AjaxSender = (function() {
+  var _ajaxSender = function() {}
 
-AjaxSender.prototype.send = function(url, responseHandler){
-  var xmlHttpRequest = new XMLHttpRequest();
-  xmlHttpRequest.onreadystatechange = function(){
-    if(this.readyState == this.DONE){
-      responseHandler(xmlHttpRequest.responseText);
+  _ajaxSender.prototype.send = function(url, responseHandler) {
+    var xmlHttpRequest = new XMLHttpRequest();
+    xmlHttpRequest.onreadystatechange = function() {
+      if (this.readyState == this.DONE) {
+        responseHandler(xmlHttpRequest.responseText);
+      }
     }
+    xmlHttpRequest.open("GET", url);
+    xmlHttpRequest.send();
   }
 
-  xmlHttpRequest.open("GET", url);
-  xmlHttpRequest.send();
-}
-
-var ajaxSender = new AjaxSender();
+  return _ajaxSender;
+})(this);

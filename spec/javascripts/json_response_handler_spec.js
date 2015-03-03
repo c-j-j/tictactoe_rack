@@ -2,30 +2,34 @@
 
 describe('Response Handler Tests', function(){
 
+  var storage, jsonResponseHandler;
+
   beforeEach(function(){
     jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures/';
     loadFixtures('play_turn_fixture.html')
+    storage = new Storage()
+    jsonResponseHandler = new JsonResponseHandler(storage)
   });
 
   it("sets status", function(){
-    JsonResponseHandler(calculateResponse());
+    jsonResponseHandler.parse(calculateResponse());
     expect(document.getElementById("status").innerHTML).toEqual('some status');
   });
 
   it("updates board cells", function(){
-    JsonResponseHandler(calculateResponse());
+    jsonResponseHandler.parse(calculateResponse());
     expect(document.getElementById("cell0").innerHTML).toEqual('O');
     expect(document.getElementById("cell1").innerHTML).toEqual('X');
   });
 
   it("updates board parameter element", function(){
-    JsonResponseHandler(calculateResponse());
-    expect(document.getElementById("board_param").innerHTML).toEqual('next board param');
+    jsonResponseHandler.parse(calculateResponse());
+    expect(storage.getItem("board_param")).toEqual('next board param');
   });
 
   it("updates computer has next turn element", function(){
-    JsonResponseHandler(calculateResponse());
-    expect(document.getElementById("computer_going_next").innerHTML).toEqual('true');
+    jsonResponseHandler.parse(calculateResponse());
+    expect(storage.getItem("computer_going_next")).toEqual(true);
   });
 
   function calculateResponse(){
