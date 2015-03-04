@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/c-j-j/tictactoe_game
-  revision: 860abf9e77100e0d53a3f9faa70ebf5f220d2610
+  revision: 148d7c79d3ba599efea10fcb5266bcb4911ac6fd
   specs:
-    tictactoe (1.0.2)
+    tictactoe (2.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -47,4 +47,4 @@ DEPENDENCIES
   rack
   rack-test
   rspec
-  tictactoe (= 1.0.2)!
+  tictactoe (= 2.0.1)!

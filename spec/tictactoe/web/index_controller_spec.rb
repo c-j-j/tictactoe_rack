@@ -16,8 +16,9 @@ describe TicTacToe::Web::IndexController do
   it 'returns index html with game types' do
     response = index_controller.call({})
     html_response = response[2][0]
-    TicTacToe::Game::GAME_TYPES.each do |game_type|
-      expect(html_response).to include(game_type)
+    TicTacToe::Game::GAME_OPTIONS.each do |game_type|
+      expect(html_response).to include(game_type.game_description)
+      expect(html_response).to include(game_type.game_type)
     end
   end
 

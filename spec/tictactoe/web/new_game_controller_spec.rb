@@ -4,7 +4,7 @@ require 'rack/test'
 describe TicTacToe::Web::NewGameController do
   include Rack::Test::Methods
 
-  let(:game_type) { 'Human Vs Human' }
+  let(:game_type) { 'HVH' }
   let(:new_game_controller) { TicTacToe::Web::RequestController.new.router}
 
   def app
@@ -12,7 +12,7 @@ describe TicTacToe::Web::NewGameController do
   end
 
   it 'returns 200 status code' do
-    get('/new_game', {'game_type' => 'Human Vs Human', 'board_size' => '3'})
+    get('/new_game', {'game_type' => TicTacToe::Game::HVH, 'board_size' => '3'})
     expect(last_response.ok?).to eq(true)
   end
 
