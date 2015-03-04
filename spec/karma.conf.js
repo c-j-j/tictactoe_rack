@@ -9,6 +9,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      "public/javascripts/vendor/jquery-2*.js",
+      "spec/javascripts/helpers/*.js",
+      "public/javascripts/vendor/jquery.c*.js",
       "public/javascripts/json_response_handler.js",
       "public/javascripts/storage.js",
       "public/javascripts/*.js",

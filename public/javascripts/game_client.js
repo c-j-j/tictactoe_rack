@@ -2,18 +2,20 @@
 
 var PLAY_TURN_PATH = '/play_turn';
 var ADD_MOVE_PATH = '/add_move';
+var GAME_TYPE = "game_type";
 
 var GameClient = (function() {
-  var _gameClient = function(ajaxCaller, responseHandler, storage) {
+  var _gameClient = function(ajaxCaller, responseHandler, storage, cookieStorage) {
     this.ajaxCaller = ajaxCaller;
     this.responseHandler = responseHandler;
     this.storage = storage;
+    this.cookieStorage = cookieStorage;
   };
 
   _gameClient.prototype.cellClicked = function(cell) {
     var queryParams = {
       "position": cell,
-      "game_type": domElement("game_type_param")
+      "game_type": cookieStorage.getCookie(GAME_TYPE)
     };
 
     if(this.storage.getItem("board_param") !== undefined){
@@ -48,5 +50,3 @@ var GameClient = (function() {
   return _gameClient;
 })(this);
 
-var storage = new Storage();
-var gameClient = new GameClient(new AjaxSender, new JsonResponseHandler(storage).parse, storage);

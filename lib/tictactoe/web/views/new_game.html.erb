@@ -4,11 +4,6 @@
 <meta charset="UTF-8">
 <title>TicTacToe</title>
 <link rel="stylesheet" href="/css/main.css">
-<% unless @remote_ip.nil? %>
-  <script>
-localStorage.setItem("REMOTE_IP", <%= @remote_ip %>);
-</script>
-<% end %>
 
 <% if ENV['USE_COFFEESCRIPT'] %>
   <script type="text/javascript" src="coffeescripts/lib/namespace.js"></script>
@@ -18,17 +13,20 @@ localStorage.setItem("REMOTE_IP", <%= @remote_ip %>);
   <script type="text/javascript" src="coffeescripts/lib/config.js"></script>
   <script type="text/javascript" src="coffeescripts/lib/main.js"></script>
 <% else %>
+  <script type="text/javascript" src="javascripts/vendor/jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" src="javascripts/vendor/jquery.cookie.js"></script>
   <script type="text/javascript" src="javascripts/json_response_handler.js"></script>
+
+  <script type="text/javascript" src="javascripts/cookie_storage.js"></script>
   <script type="text/javascript" src="javascripts/storage.js"></script>
   <script type="text/javascript" src="javascripts/ajax_sender.js"></script>
   <script type="text/javascript" src="javascripts/game_client.js"></script>
+  <script type="text/javascript" src="javascripts/game_setup.js"></script>
+  <script type="text/javascript" src="javascripts/main.js"></script>
 <% end %>
 </head>
 <body>
 <section>
-  <div hidden>
-    <output id="game_type_param"><%= @game_type %></output>
-  </div>
   <h1 id="status"><%= @game_presenter.status %></h1>
   <% @game_presenter.board_as_array.each_with_index do |mark, index| %>
     <div class="cell"

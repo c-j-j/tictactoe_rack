@@ -16,7 +16,6 @@ module TicTacToe
         @game_type = extract_game_type(req)
         game = TicTacToe::Game.build_game(@game_type, extract_board_size(req))
         @game_presenter = game.presenter
-        @remote_ip = ENV[REMOTE_IP_ENV_VAR]
         [200, {'Content-Type' => 'text/html'},
          [ERB.new(File.new(NEW_GAME_VIEW, "r").read).result(binding) ]]
       end

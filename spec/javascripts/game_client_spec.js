@@ -4,13 +4,14 @@ describe('GameClient Tests', function(){
   var ajaxCaller;
   var gameClient;
   var storage;
+  var cookieStorage;
 
   beforeEach(function(){
     ajaxCaller = new AjaxSenderSpy();
     storage = new Storage();
-    gameClient = new GameClient(ajaxCaller, 'responseHandler', storage);
-    jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures/';
-    loadFixtures('hidden_params_fixture.html');
+    cookieStorage = new CookieStorage();
+    cookieStorage.setCookie(GAME_TYPE, "HVH");
+    gameClient = new GameClient(ajaxCaller, 'responseHandler', storage, cookieStorage);
   });
 
   it("creates class", function(){
