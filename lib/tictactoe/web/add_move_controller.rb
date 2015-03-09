@@ -18,7 +18,6 @@ module TicTacToe
       def call(env)
         request = Rack::Request.new(env)
 
-        puts "hello world"
         GamePlayController.new.play_turn(extract_board_param(request), extract_game_type(request)) {|game|
           process_user_move(game, extract_position(request))
         }

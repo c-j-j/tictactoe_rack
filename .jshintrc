@@ -1,0 +1,13 @@
+{
+  "undef": true,
+    "indent": 8,
+    "predef": [
+      "it",
+    "expect",
+    "describe",
+    "Storage",
+    "CookieStorage",
+    "$"
+      ]
+
+}
