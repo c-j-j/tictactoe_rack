@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  font-family: Verdana, Arial, Helvetica, sans-serif
+}
+
+section {
+  width: 500px ;
+  margin-left: auto ;
+  margin-right: auto ;
+}
+
+.cell {
+  position: relative;
+  background-color: #fff;
+  display: block;
+  border: 1px solid black;
+  float: left;
+}
+
+.cell a {
+  position: absolute;
+  text-align: center;
+  padding: 0;
+  display: block;
+  font-size: 100px;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+}
+
+p.error {
+  color: red;
+}
