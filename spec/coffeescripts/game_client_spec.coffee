@@ -1,26 +1,30 @@
-describe 'game client', ->
-  gameClient = {}
-  ajaxCaller = {}
+describe 'CoffeeClient.GameClient', ->
+  gameClient = null
+  ajaxCaller = null
+  temporaryStorage = null
 
   beforeEach ->
+    temporaryStorage = new CoffeeClient.TemporaryStorage()
+    cookieStorage = new CoffeeClient.CookieStorage()
+    cookieStorage.setCookie(CoffeeClient.CONFIG.gameType, "HVC")
+
     ajaxCaller = new CoffeeClient.StubAjaxCaller()
-    gameClient = new CoffeeClient.GameClient(ajaxCaller, 'response_handler')
-    jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures/'
-    loadFixtures('hidden_params_fixture.html')
+    gameClient = new CoffeeClient.GameClient(ajaxCaller, 'response_handler', temporaryStorage, cookieStorage)
 
   it 'creates class', ->
     expect(gameClient.ajaxCaller).toEqual(ajaxCaller)
     expect(gameClient.responseHandler).toEqual('response_handler')
 
-  it 'calls ajax sender with add move url', ->
+  it 'calls ajax sender with url that includes game type stored in cookie', ->
     expect(gameClient.cellClicked(0))
-    expect(ajaxCaller.urlSent).toContain(CoffeeClient.CONFIG.add_move_path)
-    expect(ajaxCaller.urlSent).toContain("position=0")
-    expect(ajaxCaller.urlSent).toContain('board=some_board_param')
-    expect(ajaxCaller.urlSent).toContain('game_type=HVH')
+    expect(ajaxCaller.urlSentTo).toContain(CoffeeClient.CONFIG.add_move_path)
+    expect(ajaxCaller.urlSentTo).toContain('game_type=HVC')
 
-  it 'calls ajax sender with response handler', ->
+  xit 'calls ajax sender with response handler', ->
     expect(gameClient.cellClicked(0))
     expect(ajaxCaller.responseHandlerUsed).toEqual('response_handler')
 
-
+  xit "adds board parameter when calling add move", ->
+    temporaryStorage.setItem(CoffeeClient.CONFIG.board_param, "stored_board_param")
+    gameClient.cellClicked(0)
+    expect(ajaxCaller.urlSentTo).toContain('board=stored_board_param')

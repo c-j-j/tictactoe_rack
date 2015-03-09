@@ -2,24 +2,6 @@ require 'coffee-script'
 require 'rspec/core/rake_task'
 require 'open3'
 
-namespace :js do
-  desc "compile coffee-scripts from ./public/coffeescripts/src to ./public/coffeescripts/lib"
-  task :compile do
-    puts "Compiling coffeescript"
-    source = "#{File.dirname(__FILE__)}/public/coffeescripts/src/"
-    javascripts = "#{File.dirname(__FILE__)}/public/coffeescripts/lib/"
-
-    Dir.foreach(source) do |cf|
-      unless cf == '.' || cf == '..'
-        js = CoffeeScript.compile File.read("#{source}#{cf}")
-        open "#{javascripts}#{cf.gsub('.coffee', '.js')}", 'w' do |f|
-          f.puts js
-        end
-      end
-    end
-  end
-end
-
 namespace :server do
   desc "run rack server with javascript files"
   task :run_with_js do
@@ -29,7 +11,6 @@ namespace :server do
   desc "run rack server with compiled coffeescript files"
   task :run_with_cs do
     ENV['USE_COFFEESCRIPT'] = true.to_s
-    Rake::Task['js:compile'].invoke
     run_server
   end
 end

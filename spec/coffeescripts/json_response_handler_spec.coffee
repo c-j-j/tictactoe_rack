@@ -1,9 +1,11 @@
 describe 'coffee based json response handler', ->
 
-  responseHandler = {}
+  responseHandler = null
+  storage = null
 
   beforeEach ->
-    responseHandler = new CoffeeClient.JsonResponseHandler()
+    storage = new CoffeeClient.TemporaryStorage()
+    responseHandler = new CoffeeClient.JsonResponseHandler(storage)
     jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures/'
     loadFixtures('play_turn_fixture.html')
 
@@ -18,11 +20,11 @@ describe 'coffee based json response handler', ->
 
   it 'updates board parameter element', ->
     responseHandler.parse(stub_response())
-    expect(document.getElementById("board_param").innerHTML).toEqual('next board param')
+    expect(storage.getItem(CoffeeClient.CONFIG.board_param)).toEqual('next board param')
 
   it 'updates computer going next', ->
     responseHandler.parse(stub_response())
-    expect(document.getElementById("computer_going_next").innerHTML).toEqual('true')
+    expect(storage.getItem("computer_going_next")).toEqual(true)
 
   stub_response  = ()->
     play_turn_response = {

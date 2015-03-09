@@ -1,4 +1,4 @@
 class CoffeeClient.StubAjaxCaller
   send: (url, responseHandler) ->
-    @urlSent = url
+    @urlSentTo = url
     @responseHandlerUsed = responseHandler

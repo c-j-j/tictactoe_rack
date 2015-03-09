@@ -9,18 +9,19 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      "public/javascripts/vendor/jquery-2*.js",
+      "assets/javascripts/vendor/jquery-2*.js",
       "spec/javascripts/helpers/*.js",
-      "public/javascripts/vendor/jquery.c*.js",
-      "public/javascripts/json_response_handler.js",
-      "public/javascripts/storage.js",
-      "public/javascripts/*.js",
+      "assets/javascripts/vendor/jquery.c*.js",
+      "assets/javascripts/json_response_handler.js",
+      "assets/javascripts/storage.js",
+      "assets/javascripts/*.js",
       "spec/javascripts/helpers/*.js",
       "spec/javascripts/fixtures/**/*",
       "spec/javascripts/**/*spec.js",
       "spec/javascripts/stubs/*.js",
-      "public/coffeescripts/src/namespace.coffee",
-      "public/coffeescripts/src/**/*.coffee",
+      "assets/coffeescripts/src/namespace.coffee",
+      "assets/coffeescripts/src/temporary_storage.coffee",
+      "assets/coffeescripts/src/**/*.coffee",
       "spec/coffeescripts/**/*.coffee"
     ],
 
