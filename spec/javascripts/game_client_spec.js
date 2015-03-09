@@ -4,19 +4,13 @@ describe('GameClient Tests', function(){
   var ajaxCaller;
   var gameClient;
   var storage;
-  var cookieStorage;
 
   beforeEach(function(){
     ajaxCaller = new AjaxSenderSpy();
-    cookieStorage = new CookieStorage();
-    cookieStorage.setCookie(GAME_TYPE, "HVH");
-    cookieStorage.setCookie(BOARD, "stored_board_param");
-    gameClient = new GameClient(ajaxCaller, 'responseHandler', cookieStorage);
-  });
-
-  it("creates class", function(){
-    expect(gameClient.ajaxCaller).toEqual(ajaxCaller);
-    expect(gameClient.responseHandler).toEqual('responseHandler');
+    storage = new Storage();
+    storage.set(GAME_TYPE, "HVH");
+    storage.set(BOARD, "stored_board_param");
+    gameClient = new GameClient(ajaxCaller, 'responseHandler', storage);
   });
 
   it("calls ajax sender with add move url", function() {
@@ -40,4 +34,5 @@ describe('GameClient Tests', function(){
     gameClient.cellClicked(0);
     expect(ajaxCaller.responseHandlerUsed).toEqual('responseHandler');
   });
+
 });

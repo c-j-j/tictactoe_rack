@@ -2,10 +2,10 @@
 
 var JsonResponseHandler = (function() {
 
-  var _cookieStorage;
+  var storage;
 
   var _responseHandler = function(cookieStorage) {
-    _cookieStorage = cookieStorage;
+    storage = cookieStorage;
   };
 
   _responseHandler.prototype.parse = function(json) {
@@ -13,8 +13,8 @@ var JsonResponseHandler = (function() {
     updateDOMElementById("status", response.status);
     updateCells(response.board);
 
-    _cookieStorage.setCookie(BOARD, response.board_param);
-    _cookieStorage.setCookie(COMPUTER_GOING_NEXT, response.computer_going_next);
+    storage.set(BOARD, response.board_param);
+    storage.set(COMPUTER_GOING_NEXT, response.computer_going_next);
   };
 
   function updateCells(board) {

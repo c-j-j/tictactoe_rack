@@ -1,26 +1,36 @@
 'use strict';
 
 var GameClient = (function() {
-  var _gameClient = function(ajaxCaller, responseHandler, cookieStorage) {
-    this.ajaxCaller = ajaxCaller;
-    this.responseHandler = responseHandler;
-    this.cookieStorage = cookieStorage;
+
+  var ajaxCaller, responseHandler, storage;
+  var _gameClient = function(_ajaxCaller, _responseHandler, _storage) {
+    ajaxCaller = _ajaxCaller;
+    responseHandler = _responseHandler;
+    storage = _storage;
   };
 
   _gameClient.prototype.cellClicked = function(cell) {
+    playTurn(cell);
+  };
+
+  function playTurn(cell){
     var queryParams = {
       "position": cell,
-      "game_type": this.cookieStorage.getCookie(GAME_TYPE)
+      "game_type": storage.get(GAME_TYPE)
     };
 
-    var board_string = this.cookieStorage.getCookie(BOARD);
-    if(board_string !== undefined){
+    var board_string = storage.get(BOARD);
+    if(board_string !== undefined && board_string !== null){
       queryParams.board = board_string;
     }
 
-    var url = ADD_MOVE_PATH + addQueryParameters(queryParams);
-    this.ajaxCaller.send(url, this.responseHandler);
-  };
+    var url = playTurnUrl(queryParams);
+    ajaxCaller.send(url, responseHandler);
+  }
+
+  function playTurnUrl(queryParams){
+    return ADD_MOVE_PATH + addQueryParameters(queryParams);
+  }
 
   function addQueryParameters(queryParamList) {
     var queryParamArray = [];

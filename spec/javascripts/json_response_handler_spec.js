@@ -2,13 +2,13 @@
 
 describe('Response Handler Tests', function(){
 
-  var jsonResponseHandler;
+  var jsonResponseHandler,storage;
 
   beforeEach(function(){
     jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures/';
     loadFixtures('play_turn_fixture.html');
-    var cookieStorage = new CookieStorage();
-    jsonResponseHandler = new JsonResponseHandler(cookieStorage);
+    storage = new Storage();
+    jsonResponseHandler = new JsonResponseHandler(storage);
   });
 
   it("sets status", function(){
@@ -24,12 +24,12 @@ describe('Response Handler Tests', function(){
 
   it("updates board stored in cookie", function(){
     jsonResponseHandler.parse(calculateResponse());
-    expect(cookieStorage.getCookie(BOARD)).toEqual('next board param');
+    expect(storage.get(BOARD)).toEqual('next board param');
   });
 
   it("updates computer stored in cookie", function(){
     jsonResponseHandler.parse(calculateResponse());
-    expect(cookieStorage.getCookie(COMPUTER_GOING_NEXT)).toEqual('true');
+    expect(storage.get(COMPUTER_GOING_NEXT)).toEqual('true');
   });
 
   function calculateResponse(){

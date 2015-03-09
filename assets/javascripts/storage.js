@@ -1,19 +1,21 @@
-var Storage = (function() {
+'use strict';
 
-  var dataMap;
-
-  var storage = function() {
-    dataMap = {};
+var Storage = (function(){
+  var storage = function(){
   };
 
-  storage.prototype.setItem = function(key, value) {
-    dataMap[key] = value;
+  storage.prototype.set = function(key, value){
+    sessionStorage.setItem(key, value);
   };
 
-  storage.prototype.getItem = function(key) {
-    return dataMap[key];
+  storage.prototype.remove = function(key){
+    sessionStorage.removeItem(key);
   };
+
+  storage.prototype.get = function(key){
+    return sessionStorage.getItem(key);
+  };
+
 
   return storage;
-
 })(this);

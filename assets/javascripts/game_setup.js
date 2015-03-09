@@ -1,11 +1,12 @@
 var GameSetup = (function(){
-  var gameSetup = function(cookieStorage){
-    this.cookieStorage = cookieStorage;
+  var gameSetup = function(storage){
+    this.storage = storage;
   };
 
   gameSetup.prototype.setup = function(){
-    this.cookieStorage.setCookie('game_type', getValue("GameType"));
-    this.cookieStorage.setCookie('board_size', getValue("BoardSize"));
+    this.storage.set('game_type', getValue("GameType"));
+    this.storage.set('board_size', getValue("BoardSize"));
+    this.storage.remove(BOARD);
   };
 
   function getValue(id){
