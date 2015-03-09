@@ -14,6 +14,7 @@ module.exports = function(config) {
       "assets/javascripts/vendor/jquery.c*.js",
       "assets/javascripts/json_response_handler.js",
       "assets/javascripts/storage.js",
+      "assets/javascripts/startup.js",
       "assets/javascripts/*.js",
       "spec/javascripts/helpers/*.js",
       "spec/javascripts/fixtures/**/*",
