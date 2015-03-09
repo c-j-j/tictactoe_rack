@@ -4,12 +4,12 @@ class CoffeeClient.GameClient
   cellClicked: (cell) ->
     queryParameters = {
       position: cell,
-      game_type: @cookieStorage.getCookie(CoffeeClient.CONFIG.gameType)
+      game_type: @cookieStorage.getCookie(CoffeeClient.CONFIG.gameTypeParam)
     }
 
-    board_representation = @temporaryStorage.getItem(CoffeeClient.CONFIG.board_param)
-    queryParameters[CoffeeClient.CONFIG.board_param] = board_representation if board_representation?
-    url = CoffeeClient.CONFIG.add_move_path + toQueryParameterString(queryParameters)
+    board_representation = @temporaryStorage.getItem(CoffeeClient.CONFIG.boardParam)
+    queryParameters[CoffeeClient.CONFIG.boardParam] = board_representation if board_representation?
+    url = CoffeeClient.CONFIG.addMovePath + toQueryParameterString(queryParameters)
     @ajaxCaller.send(url, @responseHandler)
 
   toQueryParameterString = (queryParameterObj) ->

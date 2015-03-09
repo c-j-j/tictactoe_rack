@@ -2,19 +2,19 @@
 
 var JsonResponseHandler = (function() {
 
-  var _storage;
+  var _cookieStorage;
 
-  var _responseHandler = function(storage) {
-    _storage = storage;
+  var _responseHandler = function(cookieStorage) {
+    _cookieStorage = cookieStorage;
   };
 
   _responseHandler.prototype.parse = function(json) {
-    var response = JSON.parse(json)
+    var response = JSON.parse(json);
     updateDOMElementById("status", response.status);
     updateCells(response.board);
 
-    _storage.setItem("board_param", response.board_param);
-    _storage.setItem("computer_going_next", response.computer_going_next);
+    _cookieStorage.setCookie(BOARD, response.board_param);
+    _cookieStorage.setCookie(COMPUTER_GOING_NEXT, response.computer_going_next);
   };
 
   function updateCells(board) {

@@ -8,10 +8,10 @@ describe('GameClient Tests', function(){
 
   beforeEach(function(){
     ajaxCaller = new AjaxSenderSpy();
-    storage = new Storage();
     cookieStorage = new CookieStorage();
     cookieStorage.setCookie(GAME_TYPE, "HVH");
-    gameClient = new GameClient(ajaxCaller, 'responseHandler', storage, cookieStorage);
+    cookieStorage.setCookie(BOARD, "stored_board_param");
+    gameClient = new GameClient(ajaxCaller, 'responseHandler', cookieStorage);
   });
 
   it("creates class", function(){
@@ -27,7 +27,6 @@ describe('GameClient Tests', function(){
   });
 
   it("adds board parameter when calling add move", function(){
-    storage.setItem("board_param", "stored_board_param");
     gameClient.cellClicked(0);
     expect(ajaxCaller.urlSentTo).toContain('board=stored_board_param');
   });
@@ -41,19 +40,4 @@ describe('GameClient Tests', function(){
     gameClient.cellClicked(0);
     expect(ajaxCaller.responseHandlerUsed).toEqual('responseHandler');
   });
-
-  //it("calls ajax sender with play turn url", function() {
-    //gameClient.playTurn();
-    //expect(ajaxCaller.urlSentTo).toContain('/play_turn');
-  //});
-
-  //it("adds board parameter when calling play turn", function() {
-    //gameClient.playTurn();
-    //expect(ajaxCaller.urlSentTo).toContain('board=some_board_param');
-  //});
-
-  //it("adds game type parameter when calling play turn", function() {
-    //gameClient.playTurn();
-    //expect(ajaxCaller.urlSentTo).toContain('game_type=HVH');
-  //});
 });

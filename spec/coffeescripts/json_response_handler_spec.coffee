@@ -20,7 +20,7 @@ describe 'coffee based json response handler', ->
 
   it 'updates board parameter element', ->
     responseHandler.parse(stub_response())
-    expect(storage.getItem(CoffeeClient.CONFIG.board_param)).toEqual('next board param')
+    expect(storage.getItem(CoffeeClient.CONFIG.boardParam)).toEqual('next board param')
 
   it 'updates computer going next', ->
     responseHandler.parse(stub_response())

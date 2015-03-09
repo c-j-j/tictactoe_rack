@@ -5,7 +5,7 @@ class CoffeeClient.JsonResponseHandler
     response = JSON.parse(json)
     updateDOMElement("status", response.status)
     updateBoardCells(response.board)
-    @storage.setItem(CoffeeClient.CONFIG.board_param, response.board_param)
+    @storage.setItem(CoffeeClient.CONFIG.boardParam, response.board_param)
     @storage.setItem("computer_going_next", response.computer_going_next)
 
 

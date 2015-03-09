@@ -2,13 +2,13 @@
 
 describe('Response Handler Tests', function(){
 
-  var storage, jsonResponseHandler;
+  var jsonResponseHandler;
 
   beforeEach(function(){
     jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures/';
-    loadFixtures('play_turn_fixture.html')
-    storage = new Storage()
-    jsonResponseHandler = new JsonResponseHandler(storage)
+    loadFixtures('play_turn_fixture.html');
+    var cookieStorage = new CookieStorage();
+    jsonResponseHandler = new JsonResponseHandler(cookieStorage);
   });
 
   it("sets status", function(){
@@ -22,14 +22,14 @@ describe('Response Handler Tests', function(){
     expect(document.getElementById("cell1").innerHTML).toEqual('X');
   });
 
-  it("updates board parameter element", function(){
+  it("updates board stored in cookie", function(){
     jsonResponseHandler.parse(calculateResponse());
-    expect(storage.getItem("board_param")).toEqual('next board param');
+    expect(cookieStorage.getCookie(BOARD)).toEqual('next board param');
   });
 
-  it("updates computer has next turn element", function(){
+  it("updates computer stored in cookie", function(){
     jsonResponseHandler.parse(calculateResponse());
-    expect(storage.getItem("computer_going_next")).toEqual(true);
+    expect(cookieStorage.getCookie(COMPUTER_GOING_NEXT)).toEqual('true');
   });
 
   function calculateResponse(){
@@ -41,6 +41,6 @@ describe('Response Handler Tests', function(){
         ],
       "board_param": "next board param",
       "computer_going_next": true};
-    return JSON.stringify(play_turn_response)
+    return JSON.stringify(play_turn_response);
   }
 });

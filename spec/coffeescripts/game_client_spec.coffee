@@ -6,8 +6,7 @@ describe 'CoffeeClient.GameClient', ->
   beforeEach ->
     temporaryStorage = new CoffeeClient.TemporaryStorage()
     cookieStorage = new CoffeeClient.CookieStorage()
-    cookieStorage.setCookie(CoffeeClient.CONFIG.gameType, "HVC")
-
+    cookieStorage.setCookie(CoffeeClient.CONFIG.gameTypeParam, "HVC")
     ajaxCaller = new CoffeeClient.StubAjaxCaller()
     gameClient = new CoffeeClient.GameClient(ajaxCaller, 'response_handler', temporaryStorage, cookieStorage)
 
@@ -17,14 +16,14 @@ describe 'CoffeeClient.GameClient', ->
 
   it 'calls ajax sender with url that includes game type stored in cookie', ->
     expect(gameClient.cellClicked(0))
-    expect(ajaxCaller.urlSentTo).toContain(CoffeeClient.CONFIG.add_move_path)
+    expect(ajaxCaller.urlSentTo).toContain(CoffeeClient.CONFIG.addMovePath)
     expect(ajaxCaller.urlSentTo).toContain('game_type=HVC')
 
-  xit 'calls ajax sender with response handler', ->
+  it 'calls ajax sender with response handler', ->
     expect(gameClient.cellClicked(0))
     expect(ajaxCaller.responseHandlerUsed).toEqual('response_handler')
 
-  xit "adds board parameter when calling add move", ->
-    temporaryStorage.setItem(CoffeeClient.CONFIG.board_param, "stored_board_param")
+  it "adds board parameter when calling add move", ->
+    temporaryStorage.setItem(CoffeeClient.CONFIG.boardParam, "stored_board_param")
     gameClient.cellClicked(0)
     expect(ajaxCaller.urlSentTo).toContain('board=stored_board_param')
