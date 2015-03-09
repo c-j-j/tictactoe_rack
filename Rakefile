@@ -5,12 +5,12 @@ require 'open3'
 namespace :server do
   desc "run rack server with javascript files"
   task :run_with_js do
+    ENV['USE_JAVASCRIPT'] = true.to_s
     run_server
   end
 
   desc "run rack server with compiled coffeescript files"
   task :run_with_cs do
-    ENV['USE_COFFEESCRIPT'] = true.to_s
     run_server
   end
 end

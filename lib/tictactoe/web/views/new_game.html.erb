@@ -7,7 +7,15 @@
 
 <script type="text/javascript" src="assets/javascripts/vendor/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="assets/javascripts/vendor/jquery.cookie.js"></script>
-<% if ENV['USE_COFFEESCRIPT'] %>
+<% if ENV['USE_JAVASCRIPT'] %>
+  <script type="text/javascript" src="assets/javascripts/json_response_handler.js"></script>
+  <script type="text/javascript" src="assets/javascripts/cookie_storage.js"></script>
+  <script type="text/javascript" src="assets/javascripts/storage.js"></script>
+  <script type="text/javascript" src="assets/javascripts/ajax_sender.js"></script>
+  <script type="text/javascript" src="assets/javascripts/game_client.js"></script>
+  <script type="text/javascript" src="assets/javascripts/game_setup.js"></script>
+  <script type="text/javascript" src="assets/javascripts/main.js"></script>
+<% else %>
   <script type="text/javascript" src="assets/coffeescripts/src/namespace.coffee"></script>
   <script type="text/javascript" src="assets/coffeescripts/src/temporary_storage.coffee"></script>
   <script type="text/javascript" src="assets/coffeescripts/src/cookie_storage.coffee"></script>
@@ -16,14 +24,6 @@
   <script type="text/javascript" src="assets/coffeescripts/src/game_client.coffee"></script>
   <script type="text/javascript" src="assets/coffeescripts/src/config.coffee"></script>
   <script type="text/javascript" src="assets/coffeescripts/src/main.coffee"></script>
-<% else %>
-  <script type="text/javascript" src="assets/javascripts/json_response_handler.js"></script>
-  <script type="text/javascript" src="assets/javascripts/cookie_storage.js"></script>
-  <script type="text/javascript" src="assets/javascripts/storage.js"></script>
-  <script type="text/javascript" src="assets/javascripts/ajax_sender.js"></script>
-  <script type="text/javascript" src="assets/javascripts/game_client.js"></script>
-  <script type="text/javascript" src="assets/javascripts/game_setup.js"></script>
-  <script type="text/javascript" src="assets/javascripts/main.js"></script>
 <% end %>
 </head>
 <body>
