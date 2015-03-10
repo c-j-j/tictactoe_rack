@@ -10,6 +10,7 @@ describe('GameClient Tests', function(){
     storage = new Storage();
     storage.set(GAME_TYPE, "HVH");
     storage.set(BOARD, "stored_board_param");
+    storage.set(BOARD_SIZE, "3");
     gameClient = new GameClient(ajaxCaller, 'responseHandler', storage);
   });
 
@@ -23,6 +24,11 @@ describe('GameClient Tests', function(){
   it("adds board parameter when calling add move", function(){
     gameClient.cellClicked(0);
     expect(ajaxCaller.urlSentTo).toContain('board=stored_board_param');
+  });
+
+  it('sends board size in url', function(){
+    gameClient.cellClicked(0);
+    expect(ajaxCaller.urlSentTo).toContain('board_size=3');
   });
 
   it("adds game type parameter when calling add move", function(){

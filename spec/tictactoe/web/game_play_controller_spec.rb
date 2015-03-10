@@ -3,6 +3,7 @@ require 'tictactoe/stubs/stub_game'
 require 'rack/test'
 
 describe TicTacToe::Web::GamePlayController do
+  let(:board_size) { 3 }
   include Rack::Test::Methods
   include TicTacToe::Web
 
@@ -14,40 +15,41 @@ describe TicTacToe::Web::GamePlayController do
   let(:game_play_controller) { TicTacToe::Web::GamePlayController.new}
 
   it 'returns 200 status code' do
-    response = game_play_controller.play_turn(board_param, TicTacToe::Game::HVH){}
+    response = game_play_controller.play_turn(board_param, board_size, TicTacToe::Game::HVH){}
     expect(response[0]).to eq(200)
   end
 
   it 'returns game status in json response' do
-    response = game_play_controller.play_turn(board_param, TicTacToe::Game::HVH){}
+    response = game_play_controller.play_turn(board_param, board_size, TicTacToe::Game::HVH){}
     json_payload = extract_json_payload(response)
     expect(json_payload['status']).to eq(reference_game.presenter.status)
   end
 
   it 'returns board param in json response' do
-    response = game_play_controller.play_turn(board_param, TicTacToe::Game::HVH){}
-    json_payload = extract_json_payload(response)
-    expect(json_payload['board_param']).to eq(reference_game.presenter.board_as_string)
-  end
-
-  it 'creates new board when no board passed in' do
-    response = game_play_controller.play_turn(nil, TicTacToe::Game::HVH){}
+    response = game_play_controller.play_turn(board_param, board_size, TicTacToe::Game::HVH){}
     json_payload = extract_json_payload(response)
     expect(json_payload['board_param']).to eq(reference_game.presenter.board_as_string)
   end
 
   it 'returns board array in json response' do
-    response = game_play_controller.play_turn(board_param, TicTacToe::Game::HVH){}
+    response = game_play_controller.play_turn(board_param, board_size, TicTacToe::Game::HVH){}
     json_payload = extract_json_payload(response)
     expect(json_payload['board'].size).to eq(9)
   end
 
   it 'calls play turn block with game' do
     block_called = false
-    game_play_controller.play_turn(board_param, TicTacToe::Game::HVH){
+    game_play_controller.play_turn(board_param, board_size, TicTacToe::Game::HVH){
       block_called = true
     }
     expect(block_called).to eq(true)
+  end
+
+  it 'creates new board when board param not set' do
+    response = game_play_controller.play_turn(nil, board_size, TicTacToe::Game::HVH){
+    }
+    json_payload = extract_json_payload(response)
+    expect(json_payload['board_param']).to eq(reference_game.presenter.board_as_string)
   end
 
   def extract_json_payload(response)

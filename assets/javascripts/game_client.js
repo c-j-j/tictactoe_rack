@@ -14,18 +14,25 @@ var GameClient = (function() {
   };
 
   function playTurn(cell){
-    var queryParams = {
+    ajaxCaller.send(playTurnUrl(buildQueryParams(cell)), responseHandler);
+  }
+
+  function buildQueryParams(cell){
+    var queryParams =  {
       "position": cell,
-      "game_type": storage.get(GAME_TYPE)
+        "game_type": storage.get(GAME_TYPE),
+        "board_size": storage.get(BOARD_SIZE)
     };
 
+    appendBoardParamIfSet(queryParams);
+    return queryParams;
+  }
+
+  function appendBoardParamIfSet(queryParams){
     var board_string = storage.get(BOARD);
     if(board_string !== undefined && board_string !== null){
       queryParams.board = board_string;
     }
-
-    var url = playTurnUrl(queryParams);
-    ajaxCaller.send(url, responseHandler);
   }
 
   function playTurnUrl(queryParams){

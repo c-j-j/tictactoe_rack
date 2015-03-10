@@ -8,8 +8,8 @@ module TicTacToe
   module Web
     class GamePlayController
 
-      def play_turn(board_param, game_type, &play_game_turn)
-        game = build_game_from_params(board_param, game_type)
+      def play_turn(board_param, board_size, game_type, &play_game_turn)
+        game = build_game_from_params(build_board(board_param, board_size), game_type)
         play_game_turn.call(game)
         generate_response(game)
       end
@@ -25,12 +25,15 @@ module TicTacToe
          [JSON.generate(response_data)]]
       end
 
-      def build_game_from_params(board_param, game_type)
+      def build_board(board_param, board_size)
         if board_param.nil?
-          board = Board.new(3)
+          board = Board.new(board_size)
         else
           board = TicTacToe::GamePresenter.build_board_from_string(board_param)
         end
+      end
+
+      def build_game_from_params(board, game_type)
         TicTacToe::Game.build_game_with_board(game_type, board)
       end
 

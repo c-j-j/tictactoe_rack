@@ -2,7 +2,8 @@ require 'tictactoe/web/play_turn_controller'
 require 'tictactoe/game'
 require 'rack/test'
 
-describe TicTacToe::Web::PlayTurnController do
+#TODO unused. to be deprecated and replaced by single controller
+xdescribe TicTacToe::Web::PlayTurnController do
   include Rack::Test::Methods
 
   let(:play_turn_controller) { TicTacToe::Web::PlayTurnController.new }

@@ -4,8 +4,8 @@ var GameSetup = (function(){
   };
 
   gameSetup.prototype.setup = function(){
-    this.storage.set('game_type', getValue("GameType"));
-    this.storage.set('board_size', getValue("BoardSize"));
+    this.storage.set(GAME_TYPE, getValue("GameType"));
+    this.storage.set(BOARD_SIZE, getValue("BoardSize"));
     this.storage.remove(BOARD);
   };
 

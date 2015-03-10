@@ -9,6 +9,7 @@ module TicTacToe
   module Web
 
     BOARD_PARAM = 'board'
+    BOARD_SIZE_PARAM = 'board_size'
     GAME_TYPE_PARAM = 'game_type'
     POSITION_PARAM = 'position'
 
@@ -18,7 +19,7 @@ module TicTacToe
       def call(env)
         request = Rack::Request.new(env)
 
-        GamePlayController.new.play_turn(extract_board_param(request), extract_game_type(request)) {|game|
+        GamePlayController.new.play_turn(extract_board_param(request), extract_board_size(request), extract_game_type(request)) {|game|
           process_user_move(game, extract_position(request))
         }
       end
@@ -33,6 +34,10 @@ module TicTacToe
 
       def extract_board_param(request)
         request.params[BOARD_PARAM]
+      end
+
+      def extract_board_size(request)
+        request.params[BOARD_SIZE_PARAM].to_i
       end
 
       def extract_game_type(request)

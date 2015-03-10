@@ -39,8 +39,10 @@ describe TicTacToe::Web::AddMoveController do
   end
 
   def call_url_and_update_reference_game
+    board_size = 3
     get('/add_move',
         {TicTacToe::Web::GAME_TYPE_PARAM => TicTacToe::Game::HVH,
+         TicTacToe::Web::BOARD_SIZE_PARAM => board_size,
          TicTacToe::Web::BOARD_PARAM => reference_game.presenter.board_as_string,
          TicTacToe::Web::POSITION_PARAM => 0}
        )

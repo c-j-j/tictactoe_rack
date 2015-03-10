@@ -8,11 +8,19 @@ var Startup = (function(){
   };
 
   startup.prototype.start = function(){
-    if (sessionStorage.getItem(BOARD) !== null) {
+    if (boardHasBeenSet()) {
       homepageRedirect();
-      storage.remove(BOARD);
+      clearBoard();
     }
   };
+
+  function boardHasBeenSet(){
+    return sessionStorage.getItem(BOARD) !== null;
+  }
+
+  function clearBoard(){
+    storage.remove(BOARD);
+  }
 
   return startup;
 })(this);
