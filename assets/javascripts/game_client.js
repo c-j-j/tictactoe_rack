@@ -3,13 +3,13 @@
 var GameClient = (function() {
 
   var ajaxCaller, responseHandler, storage;
-  var _gameClient = function(_ajaxCaller, _responseHandler, _storage) {
+  var gameClient = function(_ajaxCaller, _responseHandler, _storage) {
     ajaxCaller = _ajaxCaller;
     responseHandler = _responseHandler;
     storage = _storage;
   };
 
-  _gameClient.prototype.cellClicked = function(cell) {
+  gameClient.prototype.cellClicked = function(cell) {
     playTurn(cell);
   };
 
@@ -46,6 +46,6 @@ var GameClient = (function() {
     return "?" + queryParamArray.join("&");
   }
 
-  return _gameClient;
+  return gameClient;
 })(this);
 
